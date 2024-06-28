@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Maclaurin Series</string>
+    <string name="result_text">Resultado: %1$s\nIntervalo de Convergencia: %2$s</string>
+</resources>
