@@ -13,18 +13,21 @@ abstract class MaclaurinSeries {
     }
 
     protected fun factorial(n: Int): Double {
-        if (n == 0) return 1.0
-        var result = 1.0
+        var result = 1L
         for (i in 1..n) {
             result *= i
         }
-        return result
+        return result.toDouble()
     }
 
     protected fun pow(base: Double, exp: Int): Double {
         var result = 1.0
-        for (i in 1..exp) {
-            result *= base
+        var temp = base
+        var i = exp
+        while (i > 0) {
+            if (i % 2 == 1) result *= temp
+            temp *= temp
+            i /= 2
         }
         return result
     }

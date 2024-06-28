@@ -1,5 +1,6 @@
 package com.example.maclaurinserie
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -23,18 +24,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val functionSpinner: Spinner = findViewById(R.id.function_spinner)
-        val termsInput: EditText = findViewById(R.id.terms_input)
         val xInput: EditText = findViewById(R.id.x_input)
         val resultText: TextView = findViewById(R.id.result_text)
         val calculateButton: Button = findViewById(R.id.calculate_button)
+
+        // Predefinir el número de términos en 17
+        val terms = 17
 
         val functions = arrayOf("e^x", "sin(x)", "cos(x)", "sin⁻¹(x)", "cos⁻¹(x)", "ln(1 + x)", "sinh(x)", "cosh(x)", "tanh⁻¹(x)", "coth⁻¹(x)", "e^sin(x)", "e^cos(x)")
         functionSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, functions)
 
         calculateButton.setOnClickListener {
             val selectedFunction = functionSpinner.selectedItem.toString()
-            val terms = termsInput.text.toString().toInt()
-            val x = xInput.text.toString().toDouble()
+            val x = xInput.text.toString().toDoubleOrNull() ?: 0.0
+
             val series: MaclaurinSeries = when (selectedFunction) {
                 "e^x" -> ExpSeries()
                 "sin(x)" -> SinSeries()
